@@ -1,0 +1,13 @@
+name: ${project.name}
+description: ${project.description}
+version: ${project.version}
+main: ijuanito.com.lpc.Main
+author: ${author}
+api-version: 1.13
+depend: [LuckPerms]
+softdepend: [PlaceholderAPI]
+commands:
+  lpc:
+    description: Reload the configuration.
+    permission: lpc.reload
+    usage: "Usage: /lpc reload"
