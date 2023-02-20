@@ -5,7 +5,7 @@ main: ijuanito.com.lpc.Main
 author: ${author}
 api-version: 1.13
 depend: [LuckPerms]
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, Essentials]
 commands:
   lpc:
     description: Reload the configuration.

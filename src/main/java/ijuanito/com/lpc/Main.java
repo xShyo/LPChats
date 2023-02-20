@@ -14,7 +14,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,12 +34,13 @@ public final class Main extends JavaPlugin implements Listener {
     public static LuckPerms luckPerms;
 
     public static Main instance;
+
     @Override
     public void onEnable() {
         long l = System.nanoTime();
         luckPerms = getServer().getServicesManager().load(LuckPerms.class);
-
         instance = this;
+        PluginManager pm = Bukkit.getServer().getPluginManager();
         Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA+"       __   ___");
         Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA+" |    |__) |     "+ChatColor.GREEN+"Chat Format "+ChatColor.AQUA +pluginVersion);
         Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA+" |___ |    |___  "+ChatColor.GREEN+" By "+ ChatColor.DARK_GRAY+pluginauthor);
@@ -75,8 +78,8 @@ public final class Main extends JavaPlugin implements Listener {
 
         return new ArrayList<>();
     }
-    static Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 
+    static Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void ComponentBuilder(AsyncPlayerChatEvent e) {
@@ -85,7 +88,7 @@ public final class Main extends JavaPlugin implements Listener {
         Player p = e.getPlayer();
         String msg = e.getMessage();
         TextComponent chat = (new Format(p, msg)).create(p);
-        Bukkit.getServer().getLogger().info( (new Format(p, msg)).getFormat(p));
+        Bukkit.getServer().getLogger().info((new Format(p, msg)).getFormat(p));
         for (Player receiver : Bukkit.getOnlinePlayers()) {
             if (ess != null) {
                 User user = ess.getUser(p);
@@ -98,4 +101,5 @@ public final class Main extends JavaPlugin implements Listener {
         }
         e.setCancelled(true);
     }
+
 }
